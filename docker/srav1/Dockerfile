@@ -24,3 +24,12 @@ RUN pip install -r requirements.txt
 
 # Install PyLucene
 RUN sh docker_install_pylucene.sh
+
+# Get data and install indexes 
+RUN sh docker_deploy_snaptron.sh srav1 1
+
+# Make Snaptron ports visible outside this container
+EXPOSE 1555 1556 1557 1558 1580
+
+# Run Snaptron server as daemon
+RUN python srav1_snaptron_server
